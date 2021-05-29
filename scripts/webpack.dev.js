@@ -13,7 +13,7 @@ module.exports = merge(webpackCommon, {
   ],
   devtool: 'eval-cheap-module-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    contentBase: path.resolve(__dirname, '../build'),
     inline: true,
     port: 3000,
     after: (_, server) => {
