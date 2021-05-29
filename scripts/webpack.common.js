@@ -7,7 +7,7 @@ const { author, description } = require('../package.json');
 module.exports = {
   entry: path.resolve(__dirname, '../src/index.tsx'),
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../build'),
     filename: 'bundle.js',
   },
   module: {
