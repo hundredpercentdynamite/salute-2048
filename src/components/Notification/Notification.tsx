@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
+import { Button, Headline2 } from '@sberdevices/plasma-ui';
 import StyledBackdrop from './StyledBackdrop';
 import StyledModal from './StyledModal';
-import Button from '../Button';
 import Box from '../Box';
-import Text from '../Text';
 
 export interface NotificationProps {
   win: boolean;
@@ -13,12 +12,12 @@ export interface NotificationProps {
 const Notification: FC<NotificationProps> = ({ win, onClose }) => (
   <StyledModal>
     <StyledBackdrop />
-    <Box paddingBlock="s5" background="transparent">
-      <Text fontSize={22} color="primary">
-        {win ? 'You win! Continue?' : 'Oops...Game Over!'}
-      </Text>
+    <Box paddingBlock="s5" background="transparent" justifyContent="center">
+      <Headline2 style={{ textAlign: 'center' }}>
+        {win ? 'Вы победили! Играть дальше?' : 'Упс...Вы проиграли!'}
+      </Headline2>
     </Box>
-    <Button onClick={onClose}>{win ? 'Continue' : 'Retry'}</Button>
+    <Button onClick={onClose}>{win ? 'Продолжить' : 'Заново'}</Button>
   </StyledModal>
 );
 

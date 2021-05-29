@@ -8,7 +8,7 @@ export const defaultPalette: Palette = {
   secondary: '#bbada0',
   tertiary: '#eee4da',
   foreground: '#ffffff',
-  background: '#ffffff',
+  background: 'transparent',
   backdrop: '#edc22e',
   tile2: '#eeeeee',
   tile4: '#eeeecc',

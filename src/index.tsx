@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { DeviceThemeProvider } from '@sberdevices/plasma-ui';
+import { lightJoy } from '@sberdevices/plasma-tokens/themes/lightJoy';
 import App from './App';
-import GlobalStyle from './components/GlobalStyle';
 
 ReactDOM.render(
   <>
-    <GlobalStyle />
-    <App />
+    <DeviceThemeProvider theme={lightJoy}>
+      <App />
+    </DeviceThemeProvider>
   </>,
   document.getElementById('game'),
 );

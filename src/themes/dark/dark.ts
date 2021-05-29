@@ -10,7 +10,7 @@ const theme: Theme = {
     secondary: '#222831',
     tertiary: '#4c5f7a',
     foreground: '#ffffff',
-    background: '#000000',
+    background: 'transparent',
     backdrop: '#000000',
     tile2: '#e0e0e0',
     tile4: '#e0e0c0',

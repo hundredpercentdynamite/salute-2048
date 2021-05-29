@@ -19,11 +19,11 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ total, title }) => {
 
   return (
     <Box
-      marginInline="s2"
+      // marginInline="s2"
       paddingBlock="s3"
       paddingInline="s4"
       inlineSize="90px"
-      background="secondary"
+      background="transparent"
       flexDirection="column"
       position="relative"
       justifyContent="center"

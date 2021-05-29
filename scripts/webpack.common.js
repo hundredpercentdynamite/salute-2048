@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const { author, description } = require('../package.json');
 
 module.exports = {
@@ -16,19 +17,36 @@ module.exports = {
         exclude: [/node_modules/],
         use: 'babel-loader',
       },
+      {
+        test: /\.css$/i,
+        use: [
+          // The `injectType`  option can be avoided because it is default behaviour
+          { loader: 'style-loader', options: { injectType: 'styleTag' } },
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
     new FaviconsWebpackPlugin({
       logo: './public/images/favicon.svg',
       favicons: {
-        appName: 'React 2048',
+        appName: 'Salute 2048',
         appShortName: '2048',
         developerName: author,
         appDescription: description,
