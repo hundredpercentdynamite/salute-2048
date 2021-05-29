@@ -52,4 +52,5 @@ Temporary Items
 **/.vscode/
 
 **/dist/
+**/build/
 **/.husky
