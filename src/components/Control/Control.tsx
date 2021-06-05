@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
+import { Button } from '@sberdevices/plasma-ui';
 
 import Box from '../Box';
-// import Button from '../Button';
 import Text from '../Text';
-import { Button } from '@sberdevices/plasma-ui';
 
 export interface ControlProps {
   rows: number;
@@ -11,71 +10,24 @@ export interface ControlProps {
   onReset: () => void;
   onChangeRow: (newRow: number) => void;
   onChangeCol: (newCol: number) => void;
+  setIsShown: () => void;
 }
 
 const Control: FC<ControlProps> = ({
   onReset,
+  setIsShown,
 }) => (
-  <Box inlineSize="100%" justifyContent="end">
-    <Button size="s" onClick={onReset}>
+  <Box inlineSize="100%" justifyContent="end" flexWrap="wrap-reverse">
+    <Button view="primary" pin="circle-circle" size="s" onClick={onReset}>
       <Text fontSize={16} textTransform="capitalize">
         Новая игра
       </Text>
     </Button>
-    {/*<Box>*/}
-    {/*  <Box marginInlineEnd="s5" flexDirection="column">*/}
-    {/*    <Text textTransform="uppercase" fontSize={13} color="primary">*/}
-    {/*      rows*/}
-    {/*    </Text>*/}
-    {/*    <Box padding="s2">*/}
-    {/*      <Button*/}
-    {/*        mini*/}
-    {/*        onClick={() => onChangeRow(-1)}*/}
-    {/*        disable={rows === MIN_SCALE}*/}
-    {/*      >*/}
-    {/*        -*/}
-    {/*      </Button>*/}
-    {/*      <Box marginInline="s2">*/}
-    {/*        <Text fontSize={16} color="primary">*/}
-    {/*          {rows}*/}
-    {/*        </Text>*/}
-    {/*      </Box>*/}
-    {/*      <Button*/}
-    {/*        mini*/}
-    {/*        onClick={() => onChangeRow(1)}*/}
-    {/*        disable={rows === MAX_SCALE}*/}
-    {/*      >*/}
-    {/*        +*/}
-    {/*      </Button>*/}
-    {/*    </Box>*/}
-    {/*  </Box>*/}
-    {/*  <Box flexDirection="column">*/}
-    {/*    <Text textTransform="uppercase" fontSize={13} color="primary">*/}
-    {/*      cols*/}
-    {/*    </Text>*/}
-    {/*    <Box padding="s2">*/}
-    {/*      <Button*/}
-    {/*        mini*/}
-    {/*        onClick={() => onChangeCol(-1)}*/}
-    {/*        disable={cols === MIN_SCALE}*/}
-    {/*      >*/}
-    {/*        -*/}
-    {/*      </Button>*/}
-    {/*      <Box marginInline="s2">*/}
-    {/*        <Text fontSize={16} color="primary">*/}
-    {/*          {cols}*/}
-    {/*        </Text>*/}
-    {/*      </Box>*/}
-    {/*      <Button*/}
-    {/*        mini*/}
-    {/*        onClick={() => onChangeCol(1)}*/}
-    {/*        disable={cols === MAX_SCALE}*/}
-    {/*      >*/}
-    {/*        +*/}
-    {/*      </Button>*/}
-    {/*    </Box>*/}
-    {/*  </Box>*/}
-    {/*</Box>*/}
+    <Button view="secondary" pin="square-square" size="s" onClick={setIsShown} style={{ marginLeft: '15px' }}>
+      <Text fontSize={16} textTransform="capitalize">
+        Помощь
+      </Text>
+    </Button>
   </Box>
 );
 

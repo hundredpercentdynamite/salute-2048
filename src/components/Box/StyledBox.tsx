@@ -49,6 +49,7 @@ export interface StyledBoxProps {
   alignItems?: 'center' | 'start' | 'end' | 'stretch';
   background?: Color;
   borderRadius?: Length;
+  flexWrap?: string;
 }
 
 const getBoxSizeStyles = ({
@@ -106,6 +107,7 @@ const getBoxSizeStyles = ({
 const StyledBox = styled.div<StyledBoxProps>`
   display: flex;
   flex-direction: ${({ flexDirection = 'row' }) => flexDirection};
+  flex-wrap: ${({ flexWrap = 'nowrap' }) => flexWrap};
   align-items: center;
   justify-content: ${({ justifyContent }) => {
     if (justifyContent === 'start' || justifyContent === 'end') {

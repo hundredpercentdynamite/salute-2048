@@ -20,6 +20,7 @@ export interface GameBoardProps {
   onMove: (dir: Vector) => void;
   onMovePending: () => void;
   onCloseNotification: (currentStatus: GameStatus) => void;
+  character: string;
 }
 
 const GameBoard: FC<GameBoardProps> = ({
@@ -33,6 +34,7 @@ const GameBoard: FC<GameBoardProps> = ({
   onMovePending,
   // onMergePending,
   onCloseNotification,
+  character,
 }) => {
   const [{ width: tileWidth, height: tileHeight }, setTileSize] = useState(() =>
     calcTileSize(boardSize, rows, cols, spacing),
@@ -78,6 +80,7 @@ const GameBoard: FC<GameBoardProps> = ({
       </Box>
       {(gameStatus === 'win' || gameStatus === 'lost') && (
         <Notification
+          character={character}
           win={gameStatus === 'win'}
           onClose={() => onCloseNotification(gameStatus)}
         />

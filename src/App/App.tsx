@@ -21,6 +21,7 @@ import { ThemeName } from '../themes/types';
 import GlobalStyle from '../components/GlobalStyle';
 import darkTheme from '../themes/dark';
 import { DirectionType } from '../utils/types';
+import { HelpModal } from '../components/HelpModal';
 
 export type Configuration = {
   theme: ThemeName;
@@ -55,6 +56,7 @@ const App: FC = () => {
   const assistantStateRef = useRef<AssistantAppState>({});
   const assistantRef = useRef<ReturnType<typeof createAssistant>>();
   const [selectedCharacter, setCharacter] = useState('sber' as AssistantCharacterType);
+  const [isShown, setIsShown] = useState<boolean>(true);
 
   const [{ status: gameStatus, pause }, setGameStatus] = useGameState({
     status: 'running',
@@ -93,9 +95,18 @@ const App: FC = () => {
     [setGameStatus],
   );
 
+  const onOpenHelp = () => {
+    assistantRef.current?.sendData({ action: { action_id: 'openInfo' }});
+    setIsShown(true);
+  }
+  const onCloseHelp = () => {
+    assistantRef.current?.sendData({ action: { action_id: 'closeInfo' }});
+    setIsShown(false);
+  }
+
   useEffect(() => {
     if (gameStatus === 'win') {
-      assistantRef.current?.sendData({ action: { action_id: 'gameWin' }})
+      assistantRef.current?.sendData({ action: { action_id: 'gameWin' }});
     }
     if (gameStatus === 'lost') {
       assistantRef.current?.sendData({ action: { action_id: 'gameLost' }})
@@ -117,11 +128,19 @@ const App: FC = () => {
         }
       }
       if (system?.command === 'BACK') {
+        onCloseHelp();
+        return;
+      }
+      if (system?.command === 'HOME') {
+        onOpenHelp();
         return;
       }
       if (interaction) {
         if (interaction.type === 'playAgain') {
           onResetGame();
+        }
+        if (interaction.type === 'toggleInfo') {
+          setIsShown(interaction.payload);
         }
         if (interaction.type === 'continuePlay') {
           setGameStatus('continue');
@@ -144,6 +163,7 @@ const App: FC = () => {
     <>
       <GlobalStyle character={selectedCharacter} />
       <ThemeProvider theme={darkTheme}>
+        <HelpModal isShown={isShown} setIsShown={onCloseHelp} />
         <Box
           justifyContent="center"
           inlineSize="100%"
@@ -174,6 +194,7 @@ const App: FC = () => {
                 onReset={onResetGame}
                 onChangeRow={setRows}
                 onChangeCol={setCols}
+                setIsShown={onOpenHelp}
               />
             </Box>
             <GameBoard
@@ -186,6 +207,7 @@ const App: FC = () => {
               onMove={onMove}
               onMovePending={onMovePending}
               onCloseNotification={onCloseNotification}
+              character={selectedCharacter}
             />
           </Box>
         </Box>

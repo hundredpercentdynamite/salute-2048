@@ -22,6 +22,9 @@ const DocumentStyle = createGlobalStyle`
     /** Disable eslastic scrolling on mobile */
     overflow: hidden;
     overscroll-behavior: none;
+    .nativePanel {
+      z-index: 99999;
+    }
     .sphere {
       flex-shrink: 0;
       background-repeat: no-repeat;

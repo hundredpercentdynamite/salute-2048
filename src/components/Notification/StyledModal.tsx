@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { scaleUp } from '../../utils/animation';
 
-const StyledModal = styled.div`
+const StyledModal = styled.div<{ justifyContent?: string; }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@ const StyledModal = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: ${({ justifyContent = 'center' }) => justifyContent};
 `;
 
 export default StyledModal;
