@@ -201,16 +201,16 @@ const App: FC = () => {
           justifyContent="center"
           inlineSize="100%"
           blockSize="100%"
-          marginBlockStart="s3"
           alignItems="start"
           borderRadius={0}
           background="transparent"
         >
           <Box
+            marginBlockStart="s3"
             justifyContent="center"
             flexDirection="column"
-            inlineSize={`100%`}
-            paddingInline="s4"
+            inlineSize="100%"
+            paddingInline="s3"
           >
             <Box inlineSize="100%" justifyContent="space-between">
               <Box>
