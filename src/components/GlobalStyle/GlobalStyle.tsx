@@ -17,6 +17,9 @@ const DocumentStyle = createGlobalStyle`
     color: ${text};
     background-color: ${background};
     background-image: ${gradient};
+    @media screen and (max-width: 380px) {
+      font-size: 13px;
+    }
   }
   body {
     /** Disable eslastic scrolling on mobile */

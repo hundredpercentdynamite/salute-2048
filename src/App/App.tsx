@@ -15,12 +15,14 @@ import useGameBoard from '../hooks/useGameBoard';
 import useGameScore from '../hooks/useGameScore';
 import useGameState, { GameStatus } from '../hooks/useGameState';
 import useScaleControl from '../hooks/useScaleControl';
-import { DIRECTION_MAP, GRID_SIZE, MIN_SCALE, SPACING } from '../utils/constants';
+import {
+  DIRECTION_MAP,
+  MIN_SCALE, SPACING } from '../utils/constants';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { ThemeName } from '../themes/types';
 import GlobalStyle from '../components/GlobalStyle';
 import darkTheme from '../themes/dark';
-import { DirectionType } from '../utils/types';
+import { DirectionType, Vector } from '../utils/types';
 import { HelpModal } from '../components/HelpModal';
 
 export type Configuration = {
@@ -57,6 +59,7 @@ const App: FC = () => {
   const assistantRef = useRef<ReturnType<typeof createAssistant>>();
   const [selectedCharacter, setCharacter] = useState('sber' as AssistantCharacterType);
   const [isShown, setIsShown] = useState<boolean>(true);
+  const [gridSize, setGridSize] = useState<number>(300);
 
   const [{ status: gameStatus, pause }, setGameStatus] = useGameState({
     status: 'running',
@@ -84,6 +87,12 @@ const App: FC = () => {
     addScore,
   });
 
+  const onMoveWrapper = (dir: Vector) => {
+    if (!isShown) {
+      onMove(dir);
+    }
+  }
+
   const onResetGame = useCallback(() => {
     setGameStatus('restart');
   }, [setGameStatus]);
@@ -103,6 +112,32 @@ const App: FC = () => {
     assistantRef.current?.sendData({ action: { action_id: 'closeInfo' }});
     setIsShown(false);
   }
+
+  const calculateGridSize = (): number => {
+    const height = window.screen?.availHeight;
+    const width = window.screen?.availWidth;
+    const minSize = height < width ? height : width;
+    const orientation = window.screen.orientation.type;
+    const isLandscape = orientation.startsWith('landscape');
+    if (isLandscape) {
+      return minSize - 300;
+    }
+    return minSize - 20;
+  }
+
+  const onResize = () => {
+    const size = calculateGridSize();
+    setGridSize(size);
+  }
+
+  useEffect(() => {
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    }
+  }, [])
+
 
   useEffect(() => {
     if (gameStatus === 'win') {
@@ -157,8 +192,6 @@ const App: FC = () => {
     setConfig({ rows, cols, bestScore: best, theme: 'dark' });
   }, [rows, cols, best, setConfig]);
 
-  const gridSize = window.innerWidth > 600 ? 550 : GRID_SIZE;
-
   return (
     <>
       <GlobalStyle character={selectedCharacter} />
@@ -168,6 +201,7 @@ const App: FC = () => {
           justifyContent="center"
           inlineSize="100%"
           blockSize="100%"
+          marginBlockStart="s3"
           alignItems="start"
           borderRadius={0}
           background="transparent"
@@ -175,7 +209,8 @@ const App: FC = () => {
           <Box
             justifyContent="center"
             flexDirection="column"
-            inlineSize={`${gridSize}px`}
+            inlineSize={`100%`}
+            paddingInline="s4"
           >
             <Box inlineSize="100%" justifyContent="space-between">
               <Box>
@@ -204,7 +239,7 @@ const App: FC = () => {
               cols={cols}
               spacing={SPACING}
               gameStatus={gameStatus}
-              onMove={onMove}
+              onMove={onMoveWrapper}
               onMovePending={onMovePending}
               onCloseNotification={onCloseNotification}
               character={selectedCharacter}

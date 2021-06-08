@@ -1,5 +1,5 @@
 import React from 'react';
-import { Headline2, ParagraphText1, MarkedList, MarkedItem, ParagraphText2, Button } from '@sberdevices/plasma-ui';
+import { Headline2, ParagraphText1, MarkedList, MarkedItem, ParagraphText2 } from '@sberdevices/plasma-ui';
 import StyledModal from '../Notification/StyledModal';
 import Box from '../Box/StyledBox';
 import StyledBackdrop from '../Notification/StyledBackdrop';
@@ -10,7 +10,7 @@ export type HelpModalProps = Readonly<{
 }>;
 
 const HelpModal = (props: HelpModalProps) => {
-  const { isShown, setIsShown } = props;
+  const { isShown } = props;
   if (!isShown) {
     return <></>;
   }
@@ -50,11 +50,11 @@ const HelpModal = (props: HelpModalProps) => {
             </ParagraphText1>
           </ParagraphText2>
         </Box>
-        <Box paddingBlock="s5" background="transparent" justifyContent="start" inlineSize="100%">
-          <Button onClick={setIsShown}>
-            Понятно!
-          </Button>
-        </Box>
+        {/*<Box paddingBlock="s5" background="transparent" justifyContent="start" inlineSize="100%">*/}
+        {/*  <Button onClick={setIsShown}>*/}
+        {/*    Понятно!*/}
+        {/*  </Button>*/}
+        {/*</Box>*/}
       </Box>
     </StyledModal>
   );

@@ -12,8 +12,8 @@ export interface NotificationProps {
 
 const Notification: FC<NotificationProps> = ({ win, onClose, character }) => {
   const isJoy = character === 'joy';
-  const winingText = isJoy ? 'Ты победил!' : 'Вы победили';
-  const looseText = isJoy ? 'Ты проиграл!' : 'Вы проиграли';
+  const winingText = isJoy ? 'Ты победил!' : 'Вы победили!';
+  const looseText = isJoy ? 'Ты проиграл!' : 'Вы проиграли!';
   return (
     <StyledModal>
       <StyledBackdrop />

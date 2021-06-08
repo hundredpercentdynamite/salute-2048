@@ -48,43 +48,45 @@ const GameBoard: FC<GameBoardProps> = ({
   }, [boardSize, cols, rows, spacing]);
 
   return (
-    <Box position="relative" ref={boardRef}>
-      <Grid
-        width={boardSize}
-        height={boardSize}
-        rows={rows}
-        cols={cols}
-        spacing={spacing}
-      />
-      <Box
-        position="absolute"
-        top={0}
-        left={0}
-        background="transparent"
-        blockSize="100%"
-        inlineSize="100%"
-        onTransitionEnd={onMovePending}
-      >
-        {tiles?.map(({ r, c, id, value, isMerging, isNew }) => (
-          <Tile
-            key={id}
-            width={tileWidth}
-            height={tileHeight}
-            x={calcLocation(tileWidth, c, spacing)}
-            y={calcLocation(tileHeight, r, spacing)}
-            value={value}
-            isNew={isNew}
-            isMerging={isMerging}
-          />
-        ))}
-      </Box>
-      {(gameStatus === 'win' || gameStatus === 'lost') && (
-        <Notification
-          character={character}
-          win={gameStatus === 'win'}
-          onClose={() => onCloseNotification(gameStatus)}
+    <Box inlineSize="100%" ref={boardRef} justifyContent="center" tabIndex={-1}>
+      <Box position="relative">
+        <Grid
+          width={boardSize}
+          height={boardSize}
+          rows={rows}
+          cols={cols}
+          spacing={spacing}
         />
-      )}
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          background="transparent"
+          blockSize="100%"
+          inlineSize="100%"
+          onTransitionEnd={onMovePending}
+        >
+          {tiles?.map(({ r, c, id, value, isMerging, isNew }) => (
+            <Tile
+              key={id}
+              width={tileWidth}
+              height={tileHeight}
+              x={calcLocation(tileWidth, c, spacing)}
+              y={calcLocation(tileHeight, r, spacing)}
+              value={value}
+              isNew={isNew}
+              isMerging={isMerging}
+            />
+          ))}
+        </Box>
+        {(gameStatus === 'win' || gameStatus === 'lost') && (
+          <Notification
+            character={character}
+            win={gameStatus === 'win'}
+            onClose={() => onCloseNotification(gameStatus)}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

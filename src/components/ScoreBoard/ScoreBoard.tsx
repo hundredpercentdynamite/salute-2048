@@ -20,9 +20,9 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ total, title }) => {
   return (
     <Box
       // marginInline="s2"
-      paddingBlock="s3"
-      paddingInline="s4"
-      inlineSize="90px"
+      // paddingBlock="s3"
+      // paddingInline="s4"
+      inlineSize="60px"
       background="transparent"
       flexDirection="column"
       position="relative"
