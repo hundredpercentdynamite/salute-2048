@@ -48,7 +48,7 @@ const GameBoard: FC<GameBoardProps> = ({
   }, [boardSize, cols, rows, spacing]);
 
   return (
-    <Box inlineSize="100%" ref={boardRef} justifyContent="center" tabIndex={-1}>
+    <Box inlineSize="100%" ref={boardRef} justifyContent="center">
       <Box position="relative">
         <Grid
           width={boardSize}
