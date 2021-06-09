@@ -116,9 +116,8 @@ const App: FC = () => {
   const calculateGridSize = (): number => {
     const height = window.screen?.availHeight;
     const width = window.screen?.availWidth;
-    const minSize = height < width ? height : width;
-    const orientation = window.screen.orientation.type;
-    const isLandscape = orientation.startsWith('landscape');
+    const isLandscape = height < width;
+    const minSize = isLandscape ? height : width;
     if (isLandscape) {
       return minSize - 300;
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Headline2, ParagraphText1, MarkedList, MarkedItem, ParagraphText2 } from '@sberdevices/plasma-ui';
+import { Headline2, ParagraphText1, MarkedList, MarkedItem, ParagraphText2, Button } from '@sberdevices/plasma-ui';
 import StyledModal from '../Notification/StyledModal';
 import Box from '../Box/StyledBox';
 import StyledBackdrop from '../Notification/StyledBackdrop';
@@ -10,7 +10,7 @@ export type HelpModalProps = Readonly<{
 }>;
 
 const HelpModal = (props: HelpModalProps) => {
-  const { isShown } = props;
+  const { isShown, setIsShown } = props;
   if (!isShown) {
     return <></>;
   }
@@ -18,10 +18,13 @@ const HelpModal = (props: HelpModalProps) => {
     <StyledModal justifyContent="flex-start">
       <StyledBackdrop />
       <Box padding="s5" flexDirection="column">
-        <Box paddingBlock="s5" background="transparent" justifyContent="start" alignItems="start" inlineSize="100%">
+        <Box paddingBlock="s5" background="transparent" justifyContent="space-between" alignItems="start" inlineSize="100%">
           <Headline2 style={{ textAlign: 'center' }}>
             Добро пожаловать!
           </Headline2>
+          <Button size="s" view="primary" pin="circle-circle" onClick={setIsShown}>
+            Понятно!
+          </Button>
         </Box>
         <Box paddingBlock="s5" background="transparent" justifyContent="start" alignItems="start" inlineSize="100%">
           <ParagraphText1>
@@ -50,11 +53,6 @@ const HelpModal = (props: HelpModalProps) => {
             </ParagraphText1>
           </ParagraphText2>
         </Box>
-        {/*<Box paddingBlock="s5" background="transparent" justifyContent="start" inlineSize="100%">*/}
-        {/*  <Button onClick={setIsShown}>*/}
-        {/*    Понятно!*/}
-        {/*  </Button>*/}
-        {/*</Box>*/}
       </Box>
     </StyledModal>
   );
