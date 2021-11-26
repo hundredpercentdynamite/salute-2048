@@ -4,7 +4,7 @@
   "private": true,
   "description": "A React clone of 2048 game",
   "main": "src/index.js",
-  "homepage": "https://volodyathehurricane.github.io/salute-2048",
+  "homepage": "https://hundredpercentdynamite.github.io/salute-2048/",
   "scripts": {
     "build": "webpack --config scripts/webpack.prod.js",
     "start": "webpack serve --config scripts/webpack.dev.js",
